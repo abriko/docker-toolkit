@@ -24,7 +24,7 @@ RUN  set -ex \
       # Monitoring / Shell tools
       htop \
       mc \
-      # Development tools～～·····
+      # Development tools
       vim \
       tmux \
       git \
@@ -34,7 +34,7 @@ RUN  set -ex \
       # Container
       docker-cli \
   && curl -L -o /usr/bin/kubectl \
-    "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" \
   && rm -rf /tmp/* /var/tmp/* /var/cache/apk/* /var/cache/distfiles/*
 
 
