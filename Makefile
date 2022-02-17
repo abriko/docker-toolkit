@@ -24,8 +24,14 @@ build-k8s:
 push-k8s:
 	$(call push_image,k8s)
 
-build: build-base build-k8s
+build-iac:
+	$(call build_image,,iac)
 
-push: push-base push-k8s
+push-iac:
+	$(call push_image,iac)
+
+build: build-base build-k8s build-iac
+
+push: push-base push-k8s push-iac
 
 all: build push
