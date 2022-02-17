@@ -31,10 +31,6 @@ RUN  set -ex \
       tig \
       # Scripting languages
       python3 \
-      # Container
-      docker-cli \
-  && curl -L -o /usr/bin/kubectl \
-    "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" \
   && rm -rf /tmp/* /var/tmp/* /var/cache/apk/* /var/cache/distfiles/*
 
 
