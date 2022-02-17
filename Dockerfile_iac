@@ -22,6 +22,7 @@ RUN  set -ex \
       mtr \
       bind-tools \
       openssl \
+      openssh-client \
       # Monitoring / Shell tools
       htop \
       mc \
