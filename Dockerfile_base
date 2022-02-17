@@ -2,7 +2,6 @@ FROM alpine:3
 
 ENV SHELL=/bin/bash
 
-COPY ../dotfiles/* /root/
 RUN  set -ex \
       && apk add --no-cache --update \
       # Basic shell stuff
@@ -36,4 +35,5 @@ RUN  set -ex \
   && rm -rf /tmp/* /var/tmp/* /var/cache/apk/* /var/cache/distfiles/*
 
 
+COPY dotfiles/* /root/
 CMD ["bash"]
