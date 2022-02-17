@@ -21,6 +21,7 @@ RUN  set -ex \
       socat \
       mtr \
       bind-tools \
+      openssl \
       # Monitoring / Shell tools
       htop \
       mc \
