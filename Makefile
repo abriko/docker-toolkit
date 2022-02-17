@@ -3,7 +3,7 @@
 IMAGE_REPO = abriko/toolkit
 
 define build_image
-    docker build --pull -t $(IMAGE_REPO):$(1) $(1)/
+    docker build $(1) -t $(IMAGE_REPO):$(2) $(2)/
 endef
 
 define push_image
@@ -11,7 +11,7 @@ define push_image
 endef
 
 build-base:
-	$(call build_image,base)
+	$(call build_image,--pull,base)
 	docker tag $(IMAGE_REPO):base $(IMAGE_REPO):latest
 
 push-base:
@@ -19,7 +19,7 @@ push-base:
 	docker push $(IMAGE_REPO):latest
 
 build-k8s:
-	$(call build_image,k8s)
+	$(call build_image,,k8s)
 
 push-k8s:
 	$(call push_image,k8s)
