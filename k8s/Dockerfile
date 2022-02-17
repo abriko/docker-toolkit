@@ -1,7 +1,7 @@
 FROM abriko/toolkit:base
 
 ENV KUSTOMIZE_VERSION=4.5.2
-EMV K9S_VERSION=0.25.18
+ENV K9S_VERSION=0.25.18
 
 RUN  set -ex \
     && apk add --no-cache --update \
