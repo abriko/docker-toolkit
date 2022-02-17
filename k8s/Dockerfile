@@ -2,6 +2,7 @@ FROM abriko/toolkit:base
 
 ENV KUSTOMIZE_VERSION=4.5.2
 ENV K9S_VERSION=0.25.18
+ENV SOPS_VERSION=3.7.1
 
 RUN  set -ex \
     && apk add --no-cache --update \
@@ -18,4 +19,7 @@ RUN  set -ex \
     && tar xzf k9s.tar.gz \
     && mv k9s /usr/bin \
     && rm -f k9s.tar.gz \
+    && curl -L -o sops https://github.com/mozilla/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux \
+    && chmod +x sops \
+    && mv sops /usr/bin \
     && rm -rf /tmp/* /var/tmp/* /var/cache/apk/* /var/cache/distfiles/*
