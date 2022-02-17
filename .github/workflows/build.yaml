@@ -20,5 +20,5 @@ jobs:
 
       - name: Build iamge
         run: |
-          docker build -t abriko/toolkit:latest .
-          docker push abriko/toolkit:latest
+          make build
+          make push
