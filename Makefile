@@ -3,7 +3,7 @@
 IMAGE_REPO = abriko/toolkit
 
 define build_image
-    docker build $(1) -t $(IMAGE_REPO):$(2) $(2)/
+    docker build $(1) -t $(IMAGE_REPO):$(2) -f Dockerfile_$(2) .
 endef
 
 define push_image
