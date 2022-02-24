@@ -1,3 +1,4 @@
+source /etc/bashrc
 export PROMPT_COMMAND=__prompt_command  # Func to gen PS1 after CMDs
 
 update_title() { echo -en "\e]0;$(basename $(pwd))\a"; }
@@ -23,3 +24,11 @@ function __prompt_command() {
 
   PS1="[$GREY\D{%H:%M:%S}$CLEAR] $BOLD\u@\h $GREEN\w $YELLOW↱ \$(parse_git_branch) $BLUE🐍 \$(python_version)$CLEAR\n${GREEN}▶${CLEAR} "
 }
+
+alias l='ls -lah'
+alias la='ls -lAh'
+alias ll='ls -lh'
+alias ls='ls --color=tty'
+alias lsa='ls -lah'
+alias md='mkdir -p'
+alias rd=rmdir

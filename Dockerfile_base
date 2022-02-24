@@ -33,6 +33,8 @@ RUN  set -ex \
       tig \
       # Scripting languages
       python3 \
+  && mkdir -p /etc/bash_completion.d \
+  && touch /etc/bashrc \
   && rm -rf /tmp/* /var/tmp/* /var/cache/apk/* /var/cache/distfiles/*
 
 
