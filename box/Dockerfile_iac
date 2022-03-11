@@ -75,7 +75,8 @@ RUN  set -ex \
     && unzip -d /usr/bin terraform.zip \ 
     && rm -rf terraform.zip \
     && mkdir -p /root/.aws \
-    && touch /root/.aws/{credentials,config}
+    && touch /root/.aws/credentials \
+    && touch /root/.aws/config
 
 COPY dotfiles/* /root/
 RUN  set -ex \
