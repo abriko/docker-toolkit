@@ -11,6 +11,8 @@ RUN  set -ex \
       grep \
       gawk \
       tree \
+      augeas \
+      shadow \
       # Interacting with the networks
       curl \
       wget \
@@ -23,6 +25,7 @@ RUN  set -ex \
       bind-tools \
       openssl \
       openssh-client \
+      openssh-server \
       # Monitoring / Shell tools
       htop \
       mc \
@@ -35,6 +38,12 @@ RUN  set -ex \
       python3 \
   && mkdir -p /etc/bash_completion.d \
   && touch /etc/bashrc \
+  && deluser $(getent passwd 33 | cut -d: -f1) \
+  && delgroup $(getent group 33 | cut -d: -f1) 2>/dev/null || true \
+  && mkdir -p ~root/.ssh /etc/authorized_keys && chmod 700 ~root/.ssh/ \
+  && augtool 'set /files/etc/ssh/sshd_config/AuthorizedKeysFile ".ssh/authorized_keys /etc/authorized_keys/%u"' \
+  && echo -e "Port 22\n" >> /etc/ssh/sshd_config \
+  && cp -a /etc/ssh /etc/ssh.cache \
   && rm -rf /tmp/* /var/tmp/* /var/cache/apk/* /var/cache/distfiles/*
 
 ENV KUSTOMIZE_VERSION=4.5.2
@@ -79,7 +88,10 @@ RUN  set -ex \
     && touch /root/.aws/config
 
 COPY dotfiles/* /root/
+COPY app /app
+
 RUN  set -ex \
-    && echo 'source ~/.iac_completion' >> /root/.bashrc
+    && echo 'source ~/.iac_completion' >> /root/.bashrc \
+    && chmod +x /app/*
 
 CMD ["bash"]
