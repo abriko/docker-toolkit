@@ -26,6 +26,7 @@ RUN  set -ex \
       openssl \
       openssh-client \
       openssh-server \
+      rsync \
       # Monitoring / Shell tools
       htop \
       mc \
