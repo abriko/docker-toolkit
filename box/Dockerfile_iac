@@ -1,28 +1,26 @@
-FROM jeanblanchard/alpine-glibc:latest
+FROM debian:bullseye-slim
 
 ENV SHELL=/bin/bash
 
 RUN  set -ex \
-      && apk add --no-cache --update \
+      && apt-get update \
+      && apt-get install -y --no-install-recommends \
       # Basic shell stuff
-      bash \
       bash-completion \
-      readline \
       grep \
       gawk \
       tree \
-      augeas \
-      shadow \
+      augeas-tools \
       # Interacting with the networks
       curl \
       wget \
       jq \
-      drill \
+      ldnsutils \
       nmap \
       netcat-openbsd \
       socat \
-      mtr \
-      bind-tools \
+      mtr-tiny \
+      knot-dnsutils \
       openssl \
       openssh-client \
       openssh-server \
@@ -37,6 +35,8 @@ RUN  set -ex \
       tig \
       # Scripting languages
       python3 \
+      python3-requests \
+      python3-yaml \
   && mkdir -p /etc/bash_completion.d \
   && touch /etc/bashrc \
   && deluser $(getent passwd 33 | cut -d: -f1) \
@@ -45,15 +45,13 @@ RUN  set -ex \
   && augtool 'set /files/etc/ssh/sshd_config/AuthorizedKeysFile ".ssh/authorized_keys /etc/authorized_keys/%u"' \
   && echo -e "Port 22\n" >> /etc/ssh/sshd_config \
   && cp -a /etc/ssh /etc/ssh.cache \
-  && rm -rf /tmp/* /var/tmp/* /var/cache/apk/* /var/cache/distfiles/*
+  && rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/*
 
 ENV KUSTOMIZE_VERSION=4.5.2
 ENV K9S_VERSION=0.25.18
 ENV SOPS_VERSION=3.7.1
 
 RUN  set -ex \
-    && apk add --no-cache --update \
-        docker-cli \
     && curl -L -o /usr/bin/kubectl \
     "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" \
     && chmod +x /usr/bin/kubectl \
@@ -71,8 +69,7 @@ RUN  set -ex \
     && rm -f k9s.tar.gz \
     && curl -L -o sops https://github.com/mozilla/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux \
     && chmod +x sops \
-    && mv sops /usr/bin \
-    && rm -rf /tmp/* /var/tmp/* /var/cache/apk/* /var/cache/distfiles/*
+    && mv sops /usr/bin
 
 ENV TERRAFORM_VERSION=1.1.6
 
