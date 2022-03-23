@@ -12,6 +12,7 @@ RUN  set -ex \
       tree \
       augeas-tools \
       unzip \
+      less \
       # Interacting with the networks
       curl \
       wget \
