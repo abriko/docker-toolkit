@@ -23,6 +23,7 @@ RUN  set -ex \
       bind-tools \
       openssl \
       openssh-client \
+      lrzsz \
       # Monitoring / Shell tools
       htop \
       mc \
