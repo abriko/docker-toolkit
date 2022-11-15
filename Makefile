@@ -1,7 +1,7 @@
 .PHONY: build push box-build box-push sa-build sa-push
 
 IMAGE_REPO = abriko/toolkit
-BOXS = base k8s iac
+BOXS = base k8s iac python_dev
 STAND_ALONE = kubectl kustomize k9s
 
 box-build:

@@ -9,6 +9,7 @@ Out of the Box development/Devops environment, but have large size of image.
 - `abriko/toolkit:latest` for development/networking usage.
 - `abriko/toolkit:k8s` for container/kubernetes usage.
 - `abriko/toolkit:iac` for infrastructure/AWS development usage.
+- `abriko/toolkit:python_dev` for infrastructure/python development usage, base on `abriko/toolkit:iac`.
 
 ### Stand-alone 
 Uing docker image distribution common tools.
